@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GigMatch — Analisi di Prodotto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --bg: #17130f; --bg-elevated: #211a14; --bg-elevated-2: #2b221a;
+    --ink: #f2e9dc; --ink-muted: #b7a996; --ink-faint: #83766a;
+    --accent: #c17a1e; --accent-bright: #e0973a; --accent-2: #0e9a8a;
+    --line: rgba(242,233,220,.14); --line-strong: rgba(242,233,220,.28);
+    --font-display: "Bebas Neue", "Oswald", sans-serif;
+    --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--font-body); font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased; }
+  ::selection{ background:var(--accent); color:#17130f; }
+  a{ color:var(--accent-bright); text-decoration-color:rgba(224,151,58,.4); text-underline-offset:3px; }
+  a:hover{ text-decoration-color:currentColor; }
+  a:focus-visible{ outline:2px solid var(--accent-bright); outline-offset:2px; }
+  .wrap{ max-width:820px; margin:0 auto; padding:0 6vw; }
+
+  .docnav{ position:sticky; top:0; background:rgba(23,19,15,.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); z-index:10; }
+  .docnav-inner{ max-width:820px; margin:0 auto; padding:0 6vw; display:flex; flex-wrap:wrap; gap:1.2rem; font-family:var(--font-mono); font-size:.76rem; letter-spacing:.03em; text-transform:uppercase; }
+  .docnav-inner a{ padding:.9rem 0; color:var(--ink-muted); text-decoration:none; border-bottom:2px solid transparent; }
+  .docnav-inner a:hover, .docnav-inner a.active{ color:var(--accent-bright); border-bottom-color:var(--accent-bright); }
+
+  .doc-head{ padding:3rem 0 1.4rem; }
+  .eyebrow{ font-family:var(--font-mono); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--accent-bright); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before{ content:""; width:1.4em; height:1px; background:var(--accent-bright); display:inline-block; }
+  h1{ font-family:var(--font-display); font-weight:400; font-size:clamp(2.6rem,7vw,4.2rem); line-height:.95; margin:.4rem 0 0; letter-spacing:.01em; text-wrap:balance; }
+  .doc-sub{ font-style:italic; color:var(--ink-muted); font-size:1.15rem; margin:.8rem 0 0; max-width:56ch; }
+
+  .toc{ background:var(--bg-elevated); border:1px solid var(--line); border-radius:10px; padding:1.3rem 1.5rem; margin:1.6rem 0 2.6rem; }
+  .toc strong{ font-family:var(--font-mono); font-size:.72rem; text-transform:uppercase; letter-spacing:.1em; color:var(--ink-faint); display:block; margin-bottom:.7rem; }
+  .toc ul{ margin:0; padding:0; list-style:none; columns:2; column-gap:2rem; }
+  .toc li{ break-inside:avoid; margin-bottom:.45rem; font-size:.92rem; }
+  .toc a{ text-decoration:none; color:var(--ink-muted); }
+  .toc a:hover{ color:var(--accent-bright); }
+  @media (max-width:640px){ .toc ul{ columns:1; } }
+
+  .doc-body{ padding-bottom:4rem; }
+  .doc-body h2{ font-family:var(--font-display); font-weight:400; font-size:clamp(1.7rem,4vw,2.3rem); letter-spacing:.01em; margin:2.6rem 0 .9rem; text-wrap:balance; border-top:1px solid var(--line); padding-top:2rem; }
+  .doc-body h2:first-child{ border-top:none; padding-top:0; }
+  .doc-body h3{ font-family:var(--font-mono); font-weight:600; font-size:1.02rem; letter-spacing:.02em; color:var(--accent-2); margin:2rem 0 .6rem; }
+  .doc-body h4{ font-family:var(--font-mono); font-weight:600; font-size:.88rem; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-muted); margin:1.6rem 0 .5rem; }
+  .doc-body p{ max-width:70ch; margin:0 0 1.05rem; }
+  .doc-body ul, .doc-body ol{ max-width:70ch; padding-left:1.3rem; margin:0 0 1.1rem; color:var(--ink); }
+  .doc-body li{ margin-bottom:.4rem; }
+  .doc-body li > ul, .doc-body li > ol{ margin-top:.4rem; }
+  .doc-body blockquote{ border-left:2px solid var(--accent); margin:1.4rem 0; padding:.3rem 0 .3rem 1.2rem; color:var(--ink-muted); }
+  .doc-body blockquote p{ margin:0; }
+  .doc-body hr{ border:none; border-top:1px solid var(--line); margin:2.4rem 0; }
+  .doc-body code{ font-family:var(--font-mono); font-size:.85em; background:var(--bg-elevated-2); padding:.15em .35em; border-radius:4px; }
+  .doc-body pre{ background:var(--bg-elevated-2); border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; overflow-x:auto; }
+  .doc-body pre code{ background:none; padding:0; }
+
+  .table-wrap{
+    overflow-x:auto; margin:0 0 1.6rem; border:1px solid var(--line); border-radius:8px;
+    scrollbar-width:thin; scrollbar-color:var(--accent) var(--bg-elevated-2);
+  }
+  .table-wrap::-webkit-scrollbar{ height:8px; }
+  .table-wrap::-webkit-scrollbar-track{ background:var(--bg-elevated-2); }
+  .table-wrap::-webkit-scrollbar-thumb{ background:var(--accent); border-radius:4px; }
+  table{ border-collapse:collapse; width:100%; font-size:.92rem; table-layout:auto; }
+  th, td{ padding:.65rem .9rem; text-align:left; border-bottom:1px solid var(--line); vertical-align:top; }
+  td.num, th.num{ font-family:var(--font-mono); text-align:right; font-variant-numeric:tabular-nums; }
+  td.num{ white-space:nowrap; }
+  thead th{ font-family:var(--font-mono); font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint); background:var(--bg-elevated); }
+  tbody tr:last-child td{ border-bottom:none; }
+  tbody tr:hover{ background:var(--bg-elevated); }
+
+  footer{ padding:2rem 0 3.5rem; border-top:1px solid var(--line); }
+  footer p{ font-size:.8rem; color:var(--ink-faint); max-width:70ch; }
+
+</style>
+</head>
+<body>
+<nav class="docnav">
+  <div class="docnav-inner">
+    <a href="index.html">GigMatch</a>
+    <a href="business-plan.html">Business Plan</a>
+    <a href="product-analysis.html" class="active">Analisi di Prodotto</a>
+    <a href="business-model-canvas.html">Business Model Canvas</a>
+    <a href="glossary.html">Glossario</a>
+  </div>
+</nav>
+<main class="doc wrap">
+  <header class="doc-head">
+    <div class="eyebrow">GigMatch · Documentazione</div>
+    <h1>Analisi di prodotto — GigMatch</h1>
+    <p class="doc-sub">Documento funzionale per la futura implementazione</p>
+  </header>
+  <nav class="toc"><strong>Indice</strong><ul><li><a href="#1-personas">1. Personas</a></li>
+<li><a href="#2-flussi-utente-principali-user-flow">2. Flussi utente principali (user flow)</a></li>
+<li><a href="#3-feature-list-per-fase">3. Feature list per fase</a></li>
+<li><a href="#4-modello-dati-bozza-concettuale">4. Modello dati (bozza concettuale)</a></li>
+<li><a href="#5-algoritmo-di-matching-considerazioni">5. Algoritmo di matching — considerazioni</a></li>
+<li><a href="#6-considerazioni-tecniche-stack-indicativo-da-confermare-in-fase-di-design-tecnico">6. Considerazioni tecniche (stack indicativo, da confermare in fase di design tecnico)</a></li>
+<li><a href="#7-trust-safety">7. Trust &amp; Safety</a></li>
+<li><a href="#8-kpi-di-prodotto-da-tracciare-fin-dal-mvp">8. KPI di prodotto da tracciare fin dal MVP</a></li>
+<li><a href="#9-aspetti-privacycompliance-da-considerare-nel-design-tecnico">9. Aspetti privacy/compliance da considerare nel design tecnico</a></li></ul></nav>
+  <div class="doc-body">
+  <blockquote><p>v0.1 — 2026-09-05. Complementare a <a href="business-plan.html"><code>business-plan.md</code></a> e <a href="business-model-canvas.html"><code>business-model-canvas.md</code></a>.</p></blockquote>
+<hr>
+<h2 id="1-personas">1. Personas</h2>
+<h3 id="11-musicista-band-dj">1.1 Musicista / Band / DJ</h3>
+<ul><li><strong>Chi è</strong>: singolo musicista, band completa, DJ, cover band, tribute band, cantante solista con base, duo acustico, ecc.</li><li><strong>Bisogni</strong>: farsi trovare da locali in target, gestire le date senza sovrapposizioni, comunicare rapidamente il proprio profilo tecnico ed economico.</li><li><strong>Dati di profilazione (in fase di registrazione)</strong>:<ul><li>Tipo di attività: solista / band / duo / DJ / altro</li><li>Se band: numero componenti, ruoli (voce, chitarra, batteria, ecc.)</li><li>Genere/i musicale/i (multi-selezione: rock, pop, jazz, cover, liscio, elettronica, hip-hop, ecc.)</li><li>Se DJ: genere set, attrezzatura propria sì/no, necessità tecniche (service audio/luci)</li><li>Area geografica di disponibilità (raggio km da una città base, o multi-zona)</li><li>Disponibilità di massima (giorni della settimana, periodo dell'anno, fascia oraria)</li><li>Cachet indicativo/fascia di prezzo</li><li>Portfolio: foto, video, audio (upload o link YouTube/SoundCloud/Spotify)</li><li>Anni di esperienza / numero di eventi svolti</li><li>Attrezzatura propria disponibile (backline, service, ecc.)</li><li>Documenti opzionali per verifica profilo (P.<a href="glossary.html#iva">IVA</a>/occasionale, <a href="glossary.html#siae">SIAE</a> se autore)</li></ul></li></ul>
+<h3 id="12-gestore-di-locale">1.2 Gestore di locale</h3>
+<ul><li><strong>Chi è</strong>: proprietario/gestore di bar, pub, ristorante con musica, club, agriturismo con eventi, catena di locali.</li><li><strong>Bisogni</strong>: riempire un calendario di qualità senza dover fare da art director, ridurre il carico di adempimenti burocratici, avere uno storico e reportistica su cosa funziona con il proprio pubblico.</li><li><strong>Dati di profilazione</strong>:<ul><li>Tipo di locale (bar/pub, ristorante, club, agriturismo, spiaggia/stabilimento, catena)</li><li>Capienza / dimensione dello spazio</li><li>Generi musicali ricercati</li><li>Budget indicativo per serata/evento</li><li>Frequenza desiderata (es. weekend fisso, 1 evento a settimana, stagionale)</li><li>Attrezzatura disponibile in loco (palco, service audio/luci, backline)</li><li>Necessità di permessi/licenze già in essere o da richiedere</li></ul></li></ul>
+<h3 id="13-agenzia-art-director-booking-agent">1.3 Agenzia / Art director / Booking agent</h3>
+<ul><li><strong>Chi è</strong>: professionista o piccola struttura che si occupa della programmazione musicale per conto di uno o più locali — oggi lavora perlopiù con rubrica personale, telefonate e fogli Excel.</li><li><strong>Posizionamento</strong>: non è un target da disintermediare, ma un <strong>cliente <a href="glossary.html#b2b2c">B2B2C</a> ad alto valore</strong> e un canale di acquisizione: onboardandosi, porta con sé il proprio portafoglio di locali clienti.</li><li><strong>Bisogni</strong>: gestire in un unico posto i calendari di più locali, mantenere una rubrica di musicisti fidati, dimostrare ai locali clienti il valore del proprio lavoro con dati/reportistica, ridurre il tempo speso in attività manuali ripetitive.</li><li><strong>Dati di profilazione</strong>:<ul><li>Numero e tipologia di locali gestiti</li><li>Generi musicali di riferimento del proprio portafoglio</li><li>Ruolo (freelance, dipendente di un locale/catena, agenzia strutturata con più collaboratori)</li><li>Eventuale rubrica di musicisti già in gestione (import/collegamento)</li></ul></li><li><strong>Feature dedicate</strong> (dettaglio in Sezione 3): account con gestione delegata di più profili-locale, vista aggregata di tutti i calendari e slot vuoti, reportistica da mostrare ai locali clienti come prova di valore del proprio servizio.</li></ul>
+<hr>
+<h2 id="2-flussi-utente-principali-user-flow">2. Flussi utente principali (user flow)</h2>
+<h3 id="21-onboarding-registrazione-e-profilazione">2.1 Onboarding / Registrazione e profilazione</h3>
+<ol><li>Scelta ruolo: "Sei un musicista/DJ" o "Gestisci un locale".</li><li>Questionario di profilazione guidato (wizard a step, non un form lungo — coerente con <a href="glossary.html#ux">UX</a> stile dating app: una domanda per schermata).</li><li>Upload media (foto profilo obbligatoria, video/audio opzionali ma incentivati — es. badge "profilo completo").</li><li>Impostazione preferenze di matching (per il locale: che tipo di musicisti cerca; per il musicista: che tipo di locali cerca).</li><li>Verifica opzionale (email, telefono, in fase 2 documento/P.IVA per badge "verificato").</li></ol>
+<h3 id="22-discovery-matching-interazione-stile-swipe">2.2 Discovery / Matching (interazione stile swipe)</h3>
+<ul><li>Card che mostra: foto/video, nome band/locale, genere, zona, fascia cachet/budget, sintesi disponibilità.</li><li>Swipe destra = interesse, swipe sinistra = non interessato.</li><li><strong>Match reciproco</strong> → si apre la chat (evita spam a senso unico, aumenta qualità dei contatti).</li><li>Filtri avanzati (genere, zona, data specifica, fascia di prezzo) disponibili da subito per entrambi i lati, non solo come feature premium — la qualità del matching è il cuore del prodotto.</li></ul>
+<h3 id="23-chat-e-proposta">2.3 Chat e proposta</h3>
+<ul><li>Chat 1:1 dopo match.</li><li>Possibilità di inviare una "proposta di data" strutturata (data, orario, cachet proposto, note tecniche) invece di solo testo libero — riduce ambiguità e velocizza la chiusura dell'accordo.</li><li>Accettazione della proposta → creazione automatica di un evento nel calendario di entrambe le parti.</li></ul>
+<h3 id="24-calendario">2.4 Calendario</h3>
+<ul><li><strong>Lato locale</strong>: vista mensile/settimanale degli eventi confermati, delle proposte in corso, degli slot ancora vuoti (con suggerimento automatico "cerca un musicista per questa data").</li><li><strong>Lato musicista</strong>: vista delle proprie date confermate, blocco automatico delle date già impegnate (per evitare doppie prenotazioni), possibilità di segnare indisponibilità.</li></ul>
+<h3 id="25-contrattualistica-e-pagamento-fase-2">2.5 Contrattualistica e pagamento (fase 2)</h3>
+<ul><li>Generazione automatica di un contratto di scrittura artistica precompilato dai dati dell'evento (data, luogo, cachet, parti).</li><li>Firma digitale semplice (es. tramite provider terzo).</li><li>Gestione pagamento cachet (opzionale, in escrow) tramite <a href="glossary.html#psp">PSP</a> terzo (es. Stripe Connect) — da valutare se obbligatorio o solo facilitato.</li></ul>
+<h3 id="26-servizi-a-valore-aggiunto-fase-2-per-il-gestore">2.6 Servizi a valore aggiunto (fase 2, per il gestore)</h3>
+<ul><li>Richiesta guidata per adempimento SIAE collegato all'evento creato (integrazione con partner/consulente abilitato).</li><li>Richiesta guidata permessi di pubblico spettacolo (raccolta dati necessari, instradamento verso consulente/partner locale — non processo automatizzabile al 100%, vedi note legali nel business plan).</li><li>Attivazione assicurazione evento (partnership assicurativa, flusso in-app).</li></ul>
+<h3 id="27-recensioni-e-reputazione">2.7 Recensioni e reputazione</h3>
+<ul><li>Dopo ogni evento concluso, entrambe le parti possono lasciare una recensione reciproca (affidabilità, puntualità, qualità tecnica, rispetto degli accordi).</li><li>Il punteggio reputazionale alimenta il ranking nel matching (qualità &gt; quantità).</li></ul>
+<hr>
+<h2 id="3-feature-list-per-fase">3. Feature list per fase</h2>
+<h3 id="mvp-v1-necessario-per-validare-il-concetto">MVP (V1) — necessario per validare il concetto</h3>
+<ul><li>Registrazione e profilazione guidata (musicista, gestore locale, e account "agenzia/art director" in versione semplificata).</li><li>Upload foto + almeno un contenuto media (video/audio o link esterno).</li><li>Discovery a swipe con filtri base (genere, zona, data).</li><li>Match reciproco + chat.</li><li>Proposta di data strutturata → evento in calendario.</li><li>Calendario base (mensile) per entrambi i lati; per l'account agenzia, calendario aggregato dei locali gestiti (anche solo come lista, senza reportistica avanzata in questa fase).</li><li>Recensioni post-evento.</li><li>Piano free generoso per musicisti; piano a pagamento singolo (no tier multipli) per i locali; piano agenzia con pricing per numero di locali gestiti.</li></ul>
+<h3 id="v2-crescita-e-monetizzazione">V2 — crescita e monetizzazione</h3>
+<ul><li>Piani premium multipli per musicisti (boost visibilità, statistiche profilo, like illimitati).</li><li>Piani a tier per locali (base/pro/multi-sede).</li><li>Notifiche push intelligenti (nuovo match, promemoria evento, slot vuoti nel calendario).</li><li>Badge di verifica identità.</li><li>Ricerca/filtri avanzati (raggio km dinamico, fascia di prezzo, attrezzatura disponibile).</li><li>Dashboard analytics per il gestore (storico generi/artisti che performano meglio).</li><li>Dashboard analytics aggregata per l'account agenzia, con reportistica esportabile da mostrare ai locali clienti (valore commerciale per l'agenzia stessa).</li></ul>
+<h3 id="v3-servizi-a-valore-aggiunto-e-scalabilità">V3 — servizi a valore aggiunto e scalabilità</h3>
+<ul><li>Contrattualistica digitale con firma.</li><li>Gestione pagamento cachet in-app (escrow).</li><li>Servizio SIAE forfettario (via partnership).</li><li>Servizio richiesta permessi (via partnership/consulenza).</li><li>Assicurazione evento in-app.</li><li>Profilo "agenzia" per gestione multi-musicista/multi-locale.</li><li>Espansione geografica multi-paese (<a href="glossary.html#i18n">i18n</a>).</li></ul>
+<hr>
+<h2 id="4-modello-dati-bozza-concettuale">4. Modello dati (bozza concettuale)</h2>
+<p>Entità principali (schema concettuale, non ancora un <a href="glossary.html#db">DB</a> design):</p>
+<ul><li><strong>User</strong>: id, email, telefono, ruolo (musicista/gestore/agenzia), stato verifica, data registrazione.</li><li><strong>MusicianProfile</strong>: user_id, tipo (solista/band/dj), generi[], numero componenti, ruoli[], zona/raggio, disponibilità, fascia cachet, media[], anni esperienza, punteggio reputazione.</li><li><strong>VenueProfile</strong>: user_id, tipo locale, capienza, generi ricercati[], budget indicativo, frequenza desiderata, attrezzatura disponibile, punteggio reputazione, <code>managed_by_agency_id</code> (opzionale, se il locale è gestito in delega da un account agenzia).</li><li><strong>AgencyProfile</strong>: user_id, locali_gestiti[] (relazione a VenueProfile), numero locali, generi di riferimento del portafoglio.</li><li><strong>Match</strong>: musician_id, venue_id, stato (pending/matched/rejected), timestamp.</li><li><strong>Conversation / Message</strong>: match_id, mittente, testo, allegati, timestamp.</li><li><strong>EventProposal</strong>: match_id, data, orario, cachet proposto, note tecniche, stato (proposta/accettata/rifiutata).</li><li><strong>Event</strong>: proposal_id (se generato da proposta), data, luogo (venue_id), musicista/i (musician_id[]), stato (confermato/completato/annullato), cachet finale.</li><li><strong>Review</strong>: event_id, autore (user_id), destinatario (user_id), punteggio, commento.</li><li><strong>Subscription</strong>: user_id, piano, stato, data rinnovo.</li><li><strong>AddOnService</strong> (fase 2+): event_id, tipo (SIAE/permesso/assicurazione), stato, partner_riferimento.</li><li><strong>Payment</strong> (fase 2+): event_id, importo, stato, PSP_reference.</li></ul>
+<hr>
+<h2 id="5-algoritmo-di-matching-considerazioni">5. Algoritmo di matching — considerazioni</h2>
+<p>Fattori di ranking suggeriti (da pesare e testare in fase di validazione):</p>
+<ol><li><strong>Compatibilità di genere musicale</strong> (match esatto o affine, tassonomia gerarchica dei generi da definire).</li><li><strong>Compatibilità geografica</strong> (raggio di disponibilità del musicista vs posizione del locale).</li><li><strong>Compatibilità di budget</strong> (fascia cachet musicista vs budget indicato dal locale).</li><li><strong>Disponibilità temporale</strong> (se il locale ha una data specifica in mente).</li><li><strong>Reputazione</strong> (punteggio recensioni, storicità).</li><li><strong>Boost a pagamento</strong> (visibilità premium) — da bilanciare con attenzione per non degradare la qualità percepita del matching per i locali (rischio: se il boost domina troppo il ranking, i gestori percepiscono risultati di bassa qualità e abbandonano).</li></ol>
+<blockquote><p>Nota di design: a differenza di un dating app puro, qui la "qualità del match" deve essere misurabile (l'evento si è concretizzato? È andato bene secondo la recensione?) — questo dato va usato per migliorare l'algoritmo nel tempo (non solo massimizzare gli swipe).</p></blockquote>
+<hr>
+<h2 id="6-considerazioni-tecniche-stack-indicativo-da-confermare-in-fase-di-design-tecnico">6. Considerazioni tecniche (stack indicativo, da confermare in fase di design tecnico)</h2>
+<ul><li><strong>App mobile</strong>: cross-platform (React Native o Flutter) per raggiungere iOS/Android con un solo team, vista la fase iniziale.</li><li><strong>Backend</strong>: <a href="glossary.html#api">API</a> <a href="glossary.html#rest">REST</a>/GraphQL, stack a scelta del team (es. Node.js/NestJS o Django), containerizzato.</li><li><strong>Database</strong>: relazionale (PostgreSQL) per i dati strutturati (profili, eventi, pagamenti); eventuale store separato per media (object storage tipo S3-compatibile).</li><li><strong>Chat real-time</strong>: soluzione dedicata (es. WebSocket proprio o provider gestito) per bassa latenza.</li><li><strong>Notifiche push</strong>: provider standard (Firebase Cloud Messaging / APNs).</li><li><strong>Geolocalizzazione</strong>: calcolo distanza/raggio lato server, con librerie geospaziali standard (PostGIS se PostgreSQL).</li><li><strong>Media storage/<a href="glossary.html#cdn">CDN</a></strong>: per foto/video/audio dei profili, con compressione e transcoding.</li><li><strong>Pagamenti</strong> (fase 2+): PSP con supporto marketplace/split payment (es. Stripe Connect) per gestire cachet ed eventuali escrow senza dover ottenere licenze proprie.</li><li><strong>Osservabilità</strong>: tracking eventi prodotto (funnel onboarding, tasso di match→evento reale) fin dal <a href="glossary.html#mvp">MVP</a>, per misurare la vera metrica di successo del marketplace.</li></ul>
+<hr>
+<h2 id="7-trust-safety">7. Trust &amp; Safety</h2>
+<ul><li>Verifica identità progressiva (email/telefono obbligatori, documento/P.IVA opzionale per badge "verificato").</li><li>Sistema di recensioni bidirezionali obbligatorio post-evento per alimentare la reputazione.</li><li>Meccanismo di segnalazione/report profili (spam, comportamento scorretto, no-show).</li><li>Politica anti-fake-profile (rate limiting su creazione profili, controllo media duplicati).</li><li>Gestione dispute (es. mancato accordo su cachet dopo la proposta, cancellazioni last-minute) — da definire policy chiara fin dal MVP anche solo come linee guida testuali, per evitare ambiguità legali.</li></ul>
+<hr>
+<h2 id="8-kpi-di-prodotto-da-tracciare-fin-dal-mvp">8. KPI di prodotto da tracciare fin dal MVP</h2>
+<ul><li>Tasso di completamento profilo (musicisti e locali).</li><li>Tasso di match (swipe → match reciproco).</li><li>Tasso di conversione match → proposta di data → evento confermato → evento completato (funnel completo, è la metrica di verità del marketplace).</li><li>Tempo medio dal match alla chiusura dell'accordo.</li><li>Retention mensile per entrambi i lati.</li><li><a href="glossary.html#nps">NPS</a>/soddisfazione post-evento (dalle recensioni).</li><li>Tasso di conversione free→premium (musicisti) e trial→pagante (locali).</li></ul>
+<hr>
+<h2 id="9-aspetti-privacycompliance-da-considerare-nel-design-tecnico">9. Aspetti privacy/compliance da considerare nel design tecnico</h2>
+<ul><li>Geolocalizzazione: minimizzare la precisione mostrata pubblicamente (es. area/raggio, non indirizzo esatto, finché non c'è un match).</li><li>Media (foto/video/audio) e dati economici (cachet, budget) come dati da trattare con attenzione particolare in termini di visibilità/pubblicità del profilo.</li><li><a href="glossary.html#gdpr">GDPR</a>: base giuridica per il trattamento, informativa chiara, diritto alla cancellazione, data retention policy su chat e media.</li><li>Se si introduce pagamento/escrow: compliance <a href="glossary.html#psd2">PSD2</a>/<a href="glossary.html#kyc">KYC</a> delegata al PSP scelto, non da costruire in-house.</li></ul>
+  </div>
+</main>
+<footer class="wrap">
+  <p>GigMatch è un nome di progetto provvisorio. Documento di lavoro — le ipotesi finanziarie e di mercato vanno validate prima di qualunque decisione.</p>
+</footer>
+</body>
+</html>

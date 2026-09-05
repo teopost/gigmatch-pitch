@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GigMatch — Business Model Canvas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --bg: #17130f; --bg-elevated: #211a14; --bg-elevated-2: #2b221a;
+    --ink: #f2e9dc; --ink-muted: #b7a996; --ink-faint: #83766a;
+    --accent: #c17a1e; --accent-bright: #e0973a; --accent-2: #0e9a8a;
+    --line: rgba(242,233,220,.14); --line-strong: rgba(242,233,220,.28);
+    --font-display: "Bebas Neue", "Oswald", sans-serif;
+    --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--font-body); font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased; }
+  ::selection{ background:var(--accent); color:#17130f; }
+  a{ color:var(--accent-bright); text-decoration-color:rgba(224,151,58,.4); text-underline-offset:3px; }
+  a:hover{ text-decoration-color:currentColor; }
+  a:focus-visible{ outline:2px solid var(--accent-bright); outline-offset:2px; }
+  .wrap{ max-width:820px; margin:0 auto; padding:0 6vw; }
+
+  .docnav{ position:sticky; top:0; background:rgba(23,19,15,.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); z-index:10; }
+  .docnav-inner{ max-width:820px; margin:0 auto; padding:0 6vw; display:flex; flex-wrap:wrap; gap:1.2rem; font-family:var(--font-mono); font-size:.76rem; letter-spacing:.03em; text-transform:uppercase; }
+  .docnav-inner a{ padding:.9rem 0; color:var(--ink-muted); text-decoration:none; border-bottom:2px solid transparent; }
+  .docnav-inner a:hover, .docnav-inner a.active{ color:var(--accent-bright); border-bottom-color:var(--accent-bright); }
+
+  .doc-head{ padding:3rem 0 1.4rem; }
+  .eyebrow{ font-family:var(--font-mono); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--accent-bright); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before{ content:""; width:1.4em; height:1px; background:var(--accent-bright); display:inline-block; }
+  h1{ font-family:var(--font-display); font-weight:400; font-size:clamp(2.6rem,7vw,4.2rem); line-height:.95; margin:.4rem 0 0; letter-spacing:.01em; text-wrap:balance; }
+  .doc-sub{ font-style:italic; color:var(--ink-muted); font-size:1.15rem; margin:.8rem 0 0; max-width:56ch; }
+
+  .toc{ background:var(--bg-elevated); border:1px solid var(--line); border-radius:10px; padding:1.3rem 1.5rem; margin:1.6rem 0 2.6rem; }
+  .toc strong{ font-family:var(--font-mono); font-size:.72rem; text-transform:uppercase; letter-spacing:.1em; color:var(--ink-faint); display:block; margin-bottom:.7rem; }
+  .toc ul{ margin:0; padding:0; list-style:none; columns:2; column-gap:2rem; }
+  .toc li{ break-inside:avoid; margin-bottom:.45rem; font-size:.92rem; }
+  .toc a{ text-decoration:none; color:var(--ink-muted); }
+  .toc a:hover{ color:var(--accent-bright); }
+  @media (max-width:640px){ .toc ul{ columns:1; } }
+
+  .doc-body{ padding-bottom:4rem; }
+  .doc-body h2{ font-family:var(--font-display); font-weight:400; font-size:clamp(1.7rem,4vw,2.3rem); letter-spacing:.01em; margin:2.6rem 0 .9rem; text-wrap:balance; border-top:1px solid var(--line); padding-top:2rem; }
+  .doc-body h2:first-child{ border-top:none; padding-top:0; }
+  .doc-body h3{ font-family:var(--font-mono); font-weight:600; font-size:1.02rem; letter-spacing:.02em; color:var(--accent-2); margin:2rem 0 .6rem; }
+  .doc-body h4{ font-family:var(--font-mono); font-weight:600; font-size:.88rem; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-muted); margin:1.6rem 0 .5rem; }
+  .doc-body p{ max-width:70ch; margin:0 0 1.05rem; }
+  .doc-body ul, .doc-body ol{ max-width:70ch; padding-left:1.3rem; margin:0 0 1.1rem; color:var(--ink); }
+  .doc-body li{ margin-bottom:.4rem; }
+  .doc-body li > ul, .doc-body li > ol{ margin-top:.4rem; }
+  .doc-body blockquote{ border-left:2px solid var(--accent); margin:1.4rem 0; padding:.3rem 0 .3rem 1.2rem; color:var(--ink-muted); }
+  .doc-body blockquote p{ margin:0; }
+  .doc-body hr{ border:none; border-top:1px solid var(--line); margin:2.4rem 0; }
+  .doc-body code{ font-family:var(--font-mono); font-size:.85em; background:var(--bg-elevated-2); padding:.15em .35em; border-radius:4px; }
+  .doc-body pre{ background:var(--bg-elevated-2); border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; overflow-x:auto; }
+  .doc-body pre code{ background:none; padding:0; }
+
+  .table-wrap{
+    overflow-x:auto; margin:0 0 1.6rem; border:1px solid var(--line); border-radius:8px;
+    scrollbar-width:thin; scrollbar-color:var(--accent) var(--bg-elevated-2);
+  }
+  .table-wrap::-webkit-scrollbar{ height:8px; }
+  .table-wrap::-webkit-scrollbar-track{ background:var(--bg-elevated-2); }
+  .table-wrap::-webkit-scrollbar-thumb{ background:var(--accent); border-radius:4px; }
+  table{ border-collapse:collapse; width:100%; font-size:.92rem; table-layout:auto; }
+  th, td{ padding:.65rem .9rem; text-align:left; border-bottom:1px solid var(--line); vertical-align:top; }
+  td.num, th.num{ font-family:var(--font-mono); text-align:right; font-variant-numeric:tabular-nums; }
+  td.num{ white-space:nowrap; }
+  thead th{ font-family:var(--font-mono); font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint); background:var(--bg-elevated); }
+  tbody tr:last-child td{ border-bottom:none; }
+  tbody tr:hover{ background:var(--bg-elevated); }
+
+  footer{ padding:2rem 0 3.5rem; border-top:1px solid var(--line); }
+  footer p{ font-size:.8rem; color:var(--ink-faint); max-width:70ch; }
+
+</style>
+</head>
+<body>
+<nav class="docnav">
+  <div class="docnav-inner">
+    <a href="index.html">GigMatch</a>
+    <a href="business-plan.html">Business Plan</a>
+    <a href="product-analysis.html">Analisi di Prodotto</a>
+    <a href="business-model-canvas.html" class="active">Business Model Canvas</a>
+    <a href="glossary.html">Glossario</a>
+  </div>
+</nav>
+<main class="doc wrap">
+  <header class="doc-head">
+    <div class="eyebrow">GigMatch · Documentazione</div>
+    <h1>Business Model Canvas — GigMatch</h1>
+    
+  </header>
+  <nav class="toc"><strong>Indice</strong><ul><li><a href="#1-segmenti-di-clientela">1. Segmenti di clientela</a></li>
+<li><a href="#2-value-proposition">2. Value proposition</a></li>
+<li><a href="#3-canali">3. Canali</a></li>
+<li><a href="#4-relazioni-con-i-clienti">4. Relazioni con i clienti</a></li>
+<li><a href="#5-flussi-di-ricavo">5. Flussi di ricavo</a></li>
+<li><a href="#6-risorse-chiave">6. Risorse chiave</a></li>
+<li><a href="#7-attività-chiave">7. Attività chiave</a></li>
+<li><a href="#8-partner-chiave">8. Partner chiave</a></li>
+<li><a href="#9-struttura-dei-costi">9. Struttura dei costi</a></li>
+<li><a href="#nota-di-sintesi">Nota di sintesi</a></li></ul></nav>
+  <div class="doc-body">
+  <blockquote><p>v0.1 — 2026-09-05. Complementare a <a href="business-plan.html"><code>business-plan.md</code></a> e <a href="product-analysis.html"><code>product-analysis.md</code></a>.</p></blockquote>
+<hr>
+<h2 id="1-segmenti-di-clientela">1. Segmenti di clientela</h2>
+<ul><li><strong>Musicisti, band, DJ</strong> (freelance, semi-professionisti, professionisti) che cercano date e visibilità.</li><li><strong>Gestori di locali con musica dal vivo</strong> (bar, pub, ristoranti, club, agriturismi con eventi, catene di locali) che vogliono gestirsi il calendario in autonomia.</li><li><strong>Art director / agenzie / booking agent</strong> che gestiscono la programmazione musicale per conto di uno o più locali — segmento <strong>parallelo e complementare</strong> ai gestori self-service, non un target da disintermediare: per loro l'app è uno strumento di produttività (gestione multi-locale), non una minaccia.</li><li><em>(Fase 3)</em> Organizzatori di eventi privati (matrimoni, feste aziendali), festival, service audio-luci come lato marketplace aggiuntivo.</li></ul>
+<h2 id="2-value-proposition">2. Value proposition</h2>
+<p><strong>Per i musicisti/band/DJ:</strong></p>
+<ul><li>Visibilità verso locali in target (genere, zona) senza dover fare networking manuale.</li><li>Gestione centralizzata di calendario, proposte e contatti.</li><li>Piano gratuito generoso: nessuna barriera all'ingresso per costruirsi un profilo e iniziare a ricevere proposte.</li></ul>
+<p><strong>Per i gestori di locali (che scelgono la via self-service):</strong></p>
+<ul><li>Strumento self-service + algoritmo di matching per costruire il calendario senza dover ingaggiare un art director esterno.</li><li>Calendario di programmazione automatizzato e sempre aggiornato, con suggerimenti sugli slot vuoti.</li><li>Riduzione del carico burocratico tramite servizi integrati (<a href="glossary.html#siae">SIAE</a>, permessi, contrattualistica, assicurazione) erogati in partnership.</li></ul>
+<p><strong>Per gli art director/agenzie (che continuano a gestire i locali per conto terzi):</strong></p>
+<ul><li>Strumento di produttività per gestire più locali contemporaneamente con lo stesso sforzo (vista aggregata calendari, rubrica musicisti centralizzata).</li><li>Reportistica da mostrare ai propri locali clienti come prova del valore del proprio lavoro.</li><li>Possibilità di rivendere ai propri clienti i servizi a valore aggiunto (SIAE, permessi, assicurazione) mantenendo un proprio margine commerciale.</li></ul>
+<h2 id="3-canali">3. Canali</h2>
+<ul><li>App store (iOS/Android) — acquisizione organica e <a href="glossary.html#aso">ASO</a>.</li><li>Social media (Instagram/TikTok/Facebook) — canale naturale per musicisti e locali già attivi lì.</li><li>Passaparola e community musicali (conservatori, scuole di musica, negozi di strumenti, sale prove).</li><li>Partnership con associazioni di categoria (<a href="glossary.html#fipe">FIPE</a>, <a href="glossary.html#silb">SILB</a>, <a href="glossary.html#arci">ARCI</a>) per il lato locali.</li><li>Eventi/fiere di settore (fiere della musica, showcase, fiere per pubblici esercizi).</li><li>Onboarding concierge diretto nella città pilota (fase di lancio).</li><li>Coinvolgimento diretto di art director/agenzie già attivi come canale di acquisizione multi-locale: onboardando un'agenzia si acquisisce in un colpo solo il suo intero portafoglio di locali.</li></ul>
+<h2 id="4-relazioni-con-i-clienti">4. Relazioni con i clienti</h2>
+<ul><li><strong>Self-service</strong> per la maggior parte degli utenti (onboarding guidato in-app).</li><li><strong>Community management</strong> attivo nella fase di lancio (per costruire fiducia e massa critica).</li><li><strong>Supporto dedicato/account management</strong> per i clienti Pro/multi-sede lato locali (revenue più alto giustifica il costo del supporto umano).</li><li>Programma di referral (musicista porta locale, locale porta musicista) per accelerare l'effetto rete.</li></ul>
+<h2 id="5-flussi-di-ricavo">5. Flussi di ricavo</h2>
+<ul><li><strong>Abbonamento premium musicisti</strong> (mensile/annuale): boost visibilità, statistiche, like illimitati.</li><li><strong>Abbonamento gestori locali a tier</strong> (base/pro/multi-sede): revenue principale, willingness-to-pay più alta.</li><li><strong>Abbonamento agenzia/art director</strong> (pricing per numero di locali gestiti): <a href="glossary.html#arpu">ARPU</a> potenzialmente superiore a un singolo locale, dato che un account agenzia aggrega più clienti.</li><li><strong>Fee sui servizi a valore aggiunto</strong>: gestione SIAE forfettaria, pratiche permessi, assicurazione evento, contrattualistica (tramite partnership).</li><li><em>(Fase 2+)</em> Commissione su transazioni di pagamento cachet (se gestite in-app).</li><li><em>(Fase 2+)</em> Advertising mirato (strumenti musicali, service audio-luci, bevande/sponsor per i locali).</li><li><em>(Fase 3)</em> Dati di mercato aggregati/anonimizzati come servizio B2B.</li></ul>
+<h2 id="6-risorse-chiave">6. Risorse chiave</h2>
+<ul><li>Piattaforma tecnologica (app + backend + algoritmo di matching).</li><li>Network/massa critica di musicisti e locali (effetto rete — è l'asset più difendibile nel tempo).</li><li>Partnership con SIAE/consulenti abilitati, assicurazioni, <a href="glossary.html#psp">PSP</a> per pagamenti.</li><li>Reputazione/fiducia del brand come alternativa credibile all'intermediario tradizionale.</li><li>Dati di matching e storicità eventi (per migliorare l'algoritmo e la reportistica ai locali).</li></ul>
+<h2 id="7-attività-chiave">7. Attività chiave</h2>
+<ul><li>Sviluppo e mantenimento prodotto (app, matching, calendario, chat).</li><li>Community building e onboarding nelle città pilota.</li><li>Gestione partnership legali/burocratiche (SIAE, permessi, assicurazioni).</li><li>Customer support e trust &amp; safety (verifica profili, gestione dispute, recensioni).</li><li>Marketing e acquisizione utenti su entrambi i lati del marketplace.</li></ul>
+<h2 id="8-partner-chiave">8. Partner chiave</h2>
+<ul><li>SIAE / intermediari abilitati per la gestione forfettaria degli adempimenti (<em>da verificare fattibilità</em>).</li><li>Consulenti/studi specializzati in pratiche di pubblico spettacolo/agibilità locali (<em>da verificare fattibilità per comune</em>).</li><li>Compagnie assicurative (assicurazione evento).</li><li>Payment Service Provider con supporto marketplace (es. Stripe Connect) per cachet/escrow.</li><li>Associazioni di categoria (FIPE, SILB, ARCI, associazioni musicisti) per credibilità e canale di acquisizione.</li><li>Scuole di musica, conservatori, negozi di strumenti, sale prove per il lato musicisti.</li></ul>
+<h2 id="9-struttura-dei-costi">9. Struttura dei costi</h2>
+<ul><li>Sviluppo e manutenzione prodotto (team tech).</li><li>Infrastruttura cloud (hosting, storage media, notifiche, chat real-time).</li><li>Marketing e acquisizione utenti (<a href="glossary.html#cac">CAC</a> differenziato per lato musicista vs lato locale).</li><li>Costi legali/compliance (in particolare per i servizi SIAE/permessi e <a href="glossary.html#gdpr">GDPR</a>).</li><li>Personale (growth, partnership, customer support, trust &amp; safety).</li><li>Commissioni PSP sulle transazioni gestite in-app (se presenti).</li></ul>
+<hr>
+<h2 id="nota-di-sintesi">Nota di sintesi</h2>
+<p>Il canvas evidenzia tre assi di valore complementari, non in competizione tra loro:</p>
+<ul><li>lato <strong>musicisti</strong>: crescita della base utenti tramite gratuità generosa → effetto rete → attrattività per i locali e per le agenzie;</li><li>lato <strong>gestori di locali self-service</strong>: monetizzazione tramite abbonamento + servizi ad alto valore percepito (riduzione carico burocratico);</li><li>lato <strong>art director/agenzie</strong>: monetizzazione tramite abbonamento a più alto ARPU (gestione multi-locale) + effetto canale (un'agenzia porta con sé il proprio portafoglio di locali clienti).</li></ul>
+<p>Il vero moat nel tempo non è la <a href="glossary.html#ui">UI</a> a swipe (facilmente replicabile), ma <strong>l'effetto rete a più lati + le partnership sui servizi a valore aggiunto (SIAE, permessi, assicurazioni)</strong>, che richiedono tempo, relazioni e compliance per essere replicate da un concorrente. Il posizionamento verso gli art director come clienti (e non concorrenti) riduce inoltre il rischio di resistenza da parte di un attore oggi centrale nelle relazioni di fiducia con i locali.</p>
+  </div>
+</main>
+<footer class="wrap">
+  <p>GigMatch è un nome di progetto provvisorio. Documento di lavoro — le ipotesi finanziarie e di mercato vanno validate prima di qualunque decisione.</p>
+</footer>
+</body>
+</html>
